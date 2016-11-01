@@ -1,7 +1,7 @@
 package ${package.Mapper};
 
 import ${package.Entity}.${entity};
-import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.kingdowin.xiugr.common.dao.base.BaseMapper;
 
 /**
  * Mapper接口
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  * @author ${author}
  * @since ${date}
  */
-public interface ${table.mapperName} extends AutoMapper<${entity}> {
+public interface ${table.mapperName} extends BaseMapper<${entity}> {
 
 }

@@ -19,8 +19,7 @@ public class TableInfo {
     private String entityName;
     private String mapperName;
     private String xmlName;
-    private String serviceName;
-    private String serviceImplName;
+    private String daoName;
 
     private List<TableField> fields;
     private String fieldNames;
@@ -66,20 +65,12 @@ public class TableInfo {
         this.xmlName = xmlName;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public String getDaoName() {
+        return daoName;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    public String getServiceImplName() {
-        return serviceImplName;
-    }
-
-    public void setServiceImplName(String serviceImplName) {
-        this.serviceImplName = serviceImplName;
+    public void setDaoName(String daoName) {
+        this.daoName = daoName;
     }
 
     public List<TableField> getFields() {
@@ -134,7 +125,10 @@ public class TableInfo {
      */
     private String cov2col(TableField field) {
         if (null != field) {
-            return field.isConvert() ? field.getName() + " AS " + field.getPropertyName() : field.getName();
+            //return field.isConvert() ? field.getName() + " AS " + field.getPropertyName() : field.getName();
+
+            // 去掉As别名
+            return field.getName();
         }
         return StringUtils.EMPTY;
     }

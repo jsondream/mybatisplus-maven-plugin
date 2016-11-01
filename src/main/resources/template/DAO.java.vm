@@ -1,0 +1,28 @@
+package ${package.DAO};
+
+import ${package.Entity}.${entity};
+import com.kingdowin.xiugr.common.dao.base.BaseDAO;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * 服务类
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${table.daoName} extends BaseDAO<${entity}> {
+
+    private static final Logger LOG = Logger.getLogger(${entity}.class);
+
+    @Autowired private ${entity}Mapper mapper;
+
+
+    public ${entity}Mapper getMapper() {
+        return mapper;
+        }
+
+    public void setMapper(${entity}Mapper mapper) {
+        this.mapper = mapper;
+    }
+}

@@ -118,7 +118,7 @@
                     <!-- mapper.xml 中添加二级缓存配置(默认true) -->
                     <enableCache>true</enableCache>
                     <!-- 开发者名称 -->
-                    <author>Yanghu</author>
+                    <author>王光东</author>
                     <!-- 数据源配置，(必配) -->
                     <dataSource>
                         <driverName>com.mysql.jdbc.Driver</driverName>

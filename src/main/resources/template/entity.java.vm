@@ -1,8 +1,5 @@
 package ${package.Entity};
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 #if(${table.hasDate})
@@ -15,24 +12,27 @@ import java.util.Date;
  * @author ${author}
  * @since ${date}
  */
-@TableName("${table.name}")
-public class ${entity} implements Serializable {
+public class ${entity} extends BaseBean implements MemBean  {
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 
     #foreach($field in ${table.fields})
     /**
      * ${field.comment}
      */
-    #if(${field.keyFlag})
-    @TableId(type = IdType.${idGenType})
-    #end
-    #if($field.convert)
-    @TableField(value="${field.name}")
-    #end
     private ${field.propertyType} ${field.propertyName};
     #end
+
+    @Override
+    public String getKey() {
+        // TODO Auto-generated method stub
+        return getClassKey() + "_" + getId();
+    }
+
+    @Override
+    public String getClassKey() {
+        // TODO Auto-generated method stub
+        return ${entity}.class.getSimpleName().toUpperCase();
+    }
 
     #foreach($field in ${table.fields})
         #if(${field.propertyName.equals("Boolean")})

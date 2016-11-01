@@ -13,7 +13,7 @@ public class PackageConfig {
     /**
      * 父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
      */
-    @Parameter(defaultValue = "com.baomidou")
+    @Parameter(defaultValue = "com.kingdowin.xiugr.server.dao")
     private String parent;
     /**
      * Entity包名
@@ -22,16 +22,11 @@ public class PackageConfig {
     private String entity;
 
     /**
-     * Service包名
+     * dao包名
      */
-    @Parameter(defaultValue = "service")
-    private String service;
+    @Parameter(defaultValue = "daoName")
+    private String daoName;
 
-    /**
-     * Service Impl包名
-     */
-    @Parameter(defaultValue = "service.impl")
-    private String serviceImpl;
     /**
      * Mapper包名
      */
@@ -52,13 +47,10 @@ public class PackageConfig {
         return entity;
     }
 
-    public String getService() {
-        return service;
+    public String getDaoName() {
+        return daoName;
     }
 
-    public String getServiceImpl() {
-        return serviceImpl;
-    }
 
     public String getMapper() {
         return mapper;

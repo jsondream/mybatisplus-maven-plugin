@@ -119,8 +119,7 @@ public class GenerateMojo extends AbstractGenerateMojo {
         outputFiles.put(ConstVal.ENTITY, pathInfo.get(ConstVal.ENTITY_PATH) + ConstVal.ENTITY_NAME);
         outputFiles.put(ConstVal.MAPPER, pathInfo.get(ConstVal.MAPPER_PATH) + ConstVal.MAPPER_NAME);
         outputFiles.put(ConstVal.XML, pathInfo.get(ConstVal.XML_PATH) + ConstVal.XML_NAME);
-        outputFiles.put(ConstVal.SERIVCE, pathInfo.get(ConstVal.SERIVCE_PATH) + ConstVal.SERVICE_NAME);
-        outputFiles.put(ConstVal.SERVICEIMPL, pathInfo.get(ConstVal.SERVICEIMPL_PATH) + ConstVal.SERVICEIMPL_NAME);
+        outputFiles.put(ConstVal.DAO, pathInfo.get(ConstVal.DAO_PATH) + ConstVal.DAO_NAME);
     }
 
     /**
@@ -133,8 +132,7 @@ public class GenerateMojo extends AbstractGenerateMojo {
             String entityFile = String.format(outputFiles.get(ConstVal.ENTITY), entityName);
             String mapperFile = String.format(outputFiles.get(ConstVal.MAPPER), entityName);
             String xmlFile = String.format(outputFiles.get(ConstVal.XML), entityName);
-            String serviceFile = String.format(outputFiles.get(ConstVal.SERIVCE), entityName);
-            String implFile = String.format(outputFiles.get(ConstVal.SERVICEIMPL), entityName);
+            String daoFile = String.format(outputFiles.get(ConstVal.DAO), entityName);
 
             // 根据override标识来判断是否需要创建文件
             if (isCreate(entityFile)) {
@@ -146,12 +144,10 @@ public class GenerateMojo extends AbstractGenerateMojo {
             if (isCreate(xmlFile)) {
                 vmToFile(context, ConstVal.TEMPLATE_XML, xmlFile);
             }
-            if (isCreate(serviceFile)) {
-                vmToFile(context, ConstVal.TEMPLATE_SERVICE, serviceFile);
+            if (isCreate(daoFile)) {
+                vmToFile(context, ConstVal.TEMPLATE_DAO, daoFile);
             }
-            if (isCreate(implFile)) {
-                vmToFile(context, ConstVal.TEMPLATE_SERVICEIMPL, implFile);
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

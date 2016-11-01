@@ -130,15 +130,13 @@ public class ConfigBuilder {
         packageInfo.put(ConstVal.ENTITY, joinPackage(config.getParent(), config.getEntity()));
         packageInfo.put(ConstVal.MAPPER, joinPackage(config.getParent(), config.getMapper()));
         packageInfo.put(ConstVal.XML, joinPackage(config.getParent(), config.getXml()));
-        packageInfo.put(ConstVal.SERIVCE, joinPackage(config.getParent(), config.getService()));
-        packageInfo.put(ConstVal.SERVICEIMPL, joinPackage(config.getParent(), config.getServiceImpl()));
+        packageInfo.put(ConstVal.DAO, joinPackage(config.getParent(), config.getDaoName()));
 
         pathInfo = new HashMap<String, String>();
         pathInfo.put(ConstVal.ENTITY_PATH, joinPath(outputDir, packageInfo.get(ConstVal.ENTITY)));
         pathInfo.put(ConstVal.MAPPER_PATH, joinPath(outputDir, packageInfo.get(ConstVal.MAPPER)));
         pathInfo.put(ConstVal.XML_PATH, joinPath(outputDir, packageInfo.get(ConstVal.XML)));
-        pathInfo.put(ConstVal.SERIVCE_PATH, joinPath(outputDir, packageInfo.get(ConstVal.SERIVCE)));
-        pathInfo.put(ConstVal.SERVICEIMPL_PATH, joinPath(outputDir, packageInfo.get(ConstVal.SERVICEIMPL)));
+        pathInfo.put(ConstVal.DAO_PATH, joinPath(outputDir, packageInfo.get(ConstVal.DAO)));
     }
 
     /**
@@ -202,8 +200,7 @@ public class ConfigBuilder {
             tableInfo.setEntityName(capitalFirst(processName(tableInfo.getName(), strategy)));
             tableInfo.setMapperName(tableInfo.getEntityName() + ConstVal.MAPPER);
             tableInfo.setXmlName(tableInfo.getMapperName());
-            tableInfo.setServiceName("I" + tableInfo.getEntityName() + ConstVal.SERIVCE);
-            tableInfo.setServiceImplName(tableInfo.getEntityName() + ConstVal.SERVICEIMPL);
+            tableInfo.setDaoName(tableInfo.getEntityName() + ConstVal.DAO);
         }
         return tableList;
     }
