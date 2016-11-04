@@ -21,7 +21,7 @@
         where 1=1
         <trim suffixOverrides=",">
             #foreach($field in ${table.fields})
-                <if test="${field.name} != null and ${field.name} != ''">
+        <if test="${field.propertyName} != null and ${field.propertyName} != ''">
                     and ${field.name} = #{${field.propertyName}}
                 </if>
             #end
@@ -36,11 +36,8 @@
         )
         values(
         #foreach($field in ${table.fields})
-            #{${field.propertyName}}
-            #if($velocityCount != ${table.fields.size()})
-                ,
-            #end
-        #end
+#{${field.propertyName}} #if($velocityCount != ${table.fields.size()}),#end
+#end
         )
     </insert>
 
@@ -48,11 +45,8 @@
     <update id="update" parameterType="Object">
         update ${table.name} set
         #foreach($field in ${table.fields})
-            ${field.name} = #{${field.propertyName}}
-            #if($velocityCount != ${table.fields.size()})
-                ,
-            #end
-        #end
+${field.name} = #{${field.propertyName}} #if($velocityCount != ${table.fields.size()}),#end
+#end
         where
         id=#{id}
     </update>
@@ -62,7 +56,7 @@
         update ${table.name} set
         <trim suffixOverrides=",">
             #foreach($field in ${table.fields})
-                <if test="${field.name} != null and ${field.name} != ''">
+                <if test="${field.propertyName} != null and ${field.propertyName} != ''">
                     ${field.name} = #{${field.propertyName}},
                 </if>
             #end
@@ -108,5 +102,13 @@
             </when>
             <otherwise>${pager.mysqlQueryCondition}</otherwise>
         </choose>
+    </select>
+
+    <select id="queryAllByList" resultMap="BaseResultMap"
+            parameterType="Object">
+        select
+        <include refid="baseColumnList"/>
+        from ${table.name}
+        <include refid="exampleWhereClause"/>
     </select>
 </mapper>
