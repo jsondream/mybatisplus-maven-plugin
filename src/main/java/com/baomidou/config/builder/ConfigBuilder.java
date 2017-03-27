@@ -131,12 +131,18 @@ public class ConfigBuilder {
         packageInfo.put(ConstVal.MAPPER, joinPackage(config.getParent(), config.getMapper()));
         packageInfo.put(ConstVal.XML, joinPackage(config.getParent(), config.getXml()));
         packageInfo.put(ConstVal.DAO, joinPackage(config.getParent(), config.getDaoName()));
+        packageInfo.put(ConstVal.MODEL, joinPackage(config.getParent(), config.getModel()));
+        packageInfo.put(ConstVal.SERVICE, joinPackage(config.getParent(), config.getService()));
+        packageInfo.put(ConstVal.SERVICE_IMPL, joinPackage(config.getParent(), config.getServiceImpl()));
 
         pathInfo = new HashMap<String, String>();
         pathInfo.put(ConstVal.ENTITY_PATH, joinPath(outputDir, packageInfo.get(ConstVal.ENTITY)));
         pathInfo.put(ConstVal.MAPPER_PATH, joinPath(outputDir, packageInfo.get(ConstVal.MAPPER)));
         pathInfo.put(ConstVal.XML_PATH, joinPath(outputDir, packageInfo.get(ConstVal.XML)));
         pathInfo.put(ConstVal.DAO_PATH, joinPath(outputDir, packageInfo.get(ConstVal.DAO)));
+        pathInfo.put(ConstVal.MODEL_PATH, joinPath(outputDir, packageInfo.get(ConstVal.MODEL)));
+        pathInfo.put(ConstVal.SERVICE_PATH, joinPath(outputDir, packageInfo.get(ConstVal.SERVICE)));
+        pathInfo.put(ConstVal.SERVICE_IMPL_PATH, joinPath(outputDir, packageInfo.get(ConstVal.SERVICE_IMPL)));
     }
 
     /**
@@ -201,6 +207,9 @@ public class ConfigBuilder {
             tableInfo.setMapperName(tableInfo.getEntityName() + ConstVal.MAPPER);
             tableInfo.setXmlName(tableInfo.getMapperName());
             tableInfo.setDaoName(tableInfo.getEntityName() + ConstVal.DAO);
+            tableInfo.setModelName(capitalFirst(processName(tableInfo.getEntityName()+ConstVal.MODEL, strategy)));
+            tableInfo.setServiceName(capitalFirst(processName(tableInfo.getEntityName()+ConstVal.SERVICE, strategy)));
+            tableInfo.setServiceImplName(capitalFirst(processName(tableInfo.getEntityName()+ConstVal.SERVICE_IMPL, strategy)));
         }
         return tableList;
     }

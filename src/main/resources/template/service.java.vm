@@ -1,0 +1,15 @@
+package ${package.Service};
+
+
+
+/**
+ * ${table.comment}业务接口
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${service}  {
+
+
+
+}

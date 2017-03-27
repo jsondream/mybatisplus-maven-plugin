@@ -17,6 +17,7 @@ import java.util.*;
 
 /**
  * 生成文件
+ *
  * @author YangHu
  * @since 2016/8/30
  */
@@ -74,7 +75,8 @@ public class GenerateMojo extends AbstractGenerateMojo {
         List<TableInfo> tableList = config.getTableInfoList();
         Map<String, String> packageInfo = config.getPackageInfo();
         Map<String, VelocityContext> ctxData = new HashMap<String, VelocityContext>();
-        String superClass = config.getSuperClass().substring(config.getSuperClass().lastIndexOf(".") + 1);
+        String superClass =
+            config.getSuperClass().substring(config.getSuperClass().lastIndexOf(".") + 1);
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
         for (TableInfo tableInfo : tableList) {
@@ -88,6 +90,9 @@ public class GenerateMojo extends AbstractGenerateMojo {
             ctx.put("enableCache", isEnableCache());
             ctx.put("author", getAuthor());
             ctx.put("date", date);
+            ctx.put("model", tableInfo.getModelName());
+            ctx.put("service", tableInfo.getServiceName());
+            ctx.put("serviceImpl", tableInfo.getServiceImplName());
             ctxData.put(tableInfo.getEntityName(), ctx);
         }
         return ctxData;
@@ -120,6 +125,11 @@ public class GenerateMojo extends AbstractGenerateMojo {
         outputFiles.put(ConstVal.MAPPER, pathInfo.get(ConstVal.MAPPER_PATH) + ConstVal.MAPPER_NAME);
         outputFiles.put(ConstVal.XML, pathInfo.get(ConstVal.XML_PATH) + ConstVal.XML_NAME);
         outputFiles.put(ConstVal.DAO, pathInfo.get(ConstVal.DAO_PATH) + ConstVal.DAO_NAME);
+        outputFiles.put(ConstVal.MODEL, pathInfo.get(ConstVal.MODEL_PATH) + ConstVal.MODEL_NAME);
+        outputFiles
+            .put(ConstVal.SERVICE, pathInfo.get(ConstVal.SERVICE_PATH) + ConstVal.SERVICE_NAME);
+        outputFiles.put(ConstVal.SERVICE_IMPL,
+            pathInfo.get(ConstVal.SERVICE_IMPL_PATH) + ConstVal.SERVICE_IMPL_NAME);
     }
 
     /**
@@ -133,6 +143,10 @@ public class GenerateMojo extends AbstractGenerateMojo {
             String mapperFile = String.format(outputFiles.get(ConstVal.MAPPER), entityName);
             String xmlFile = String.format(outputFiles.get(ConstVal.XML), entityName);
             String daoFile = String.format(outputFiles.get(ConstVal.DAO), entityName);
+            String modelFile = String.format(outputFiles.get(ConstVal.MODEL), entityName);
+            String serviceFile = String.format(outputFiles.get(ConstVal.SERVICE), entityName);
+            String serviceImplFile =
+                String.format(outputFiles.get(ConstVal.SERVICE_IMPL), entityName);
 
             // 根据override标识来判断是否需要创建文件
             if (isCreate(entityFile)) {
@@ -147,6 +161,15 @@ public class GenerateMojo extends AbstractGenerateMojo {
             if (isCreate(daoFile)) {
                 vmToFile(context, ConstVal.TEMPLATE_DAO, daoFile);
             }
+            if (isCreate(modelFile)) {
+                vmToFile(context, ConstVal.TEMPLATE_MODEL, modelFile);
+            }
+            if (isCreate(serviceFile)) {
+                vmToFile(context, ConstVal.TEMPLATE_SERVICE, serviceFile);
+            }
+            if (isCreate(serviceImplFile)) {
+                vmToFile(context, ConstVal.TEMPLATE_SERVICE_IMPL, serviceImplFile);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -160,7 +183,8 @@ public class GenerateMojo extends AbstractGenerateMojo {
      * @param templatePath 模板文件
      * @param outputFile   文件生成的目录
      */
-    private void vmToFile(VelocityContext context, String templatePath, String outputFile) throws IOException {
+    private void vmToFile(VelocityContext context, String templatePath, String outputFile)
+        throws IOException {
         VelocityEngine velocity = getVelocityEngine();
         Template template = velocity.getTemplate(templatePath, ConstVal.UTF8);
         FileOutputStream fos = new FileOutputStream(outputFile);

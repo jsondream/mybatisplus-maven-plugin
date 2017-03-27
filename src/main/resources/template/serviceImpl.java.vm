@@ -1,0 +1,16 @@
+package ${package.ServiceImpl};
+
+import org.springframework.stereotype.Service;
+/**
+ * ${table.comment}业务接口
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+public class ${serviceImpl} implements ${service}  {
+
+
+
+}
+

@@ -39,6 +39,25 @@ public class PackageConfig {
     @Parameter(defaultValue = "mapper.xml")
     private String xml;
 
+    /**
+     * model包名
+     */
+    @Parameter(defaultValue = "model")
+    private String model;
+
+
+    /**
+     * service包名
+     */
+    @Parameter(defaultValue = "service")
+    private String service;
+
+    /**
+     * serviceImpl包名
+     */
+    @Parameter(defaultValue = "service")
+    private String serviceImpl;
+
     public String getParent() {
         return parent;
     }
@@ -60,4 +79,15 @@ public class PackageConfig {
         return xml;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public String getServiceImpl() {
+        return serviceImpl;
+    }
 }

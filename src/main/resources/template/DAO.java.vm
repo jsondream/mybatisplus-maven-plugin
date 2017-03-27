@@ -4,6 +4,7 @@ import ${package.Entity}.${entity};
 import com.kingdowin.xiugr.common.dao.base.BaseDAO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * 服务类
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since ${date}
  */
 @Repository
-public interface ${table.daoName} extends BaseDAO<${entity}> {
+public class ${table.daoName} extends BaseDAO<${entity}> {
 
     private static final Logger LOG = Logger.getLogger(${entity}.class);
 

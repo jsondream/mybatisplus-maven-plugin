@@ -20,6 +20,9 @@ public class TableInfo {
     private String mapperName;
     private String xmlName;
     private String daoName;
+    private String modelName;
+    private String serviceName;
+    private String serviceImplName;
 
     private List<TableField> fields;
     private String fieldNames;
@@ -79,6 +82,30 @@ public class TableInfo {
 
     public void setFields(List<TableField> fields) {
         this.fields = fields;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getServiceImplName() {
+        return serviceImplName;
+    }
+
+    public void setServiceImplName(String serviceImplName) {
+        this.serviceImplName = serviceImplName;
     }
 
     /**

@@ -1,8 +1,7 @@
-package ${package.Entity};
+package ${package.Model};
 
 
-import com.kingdowin.xiugr.common.dao.base.BaseBean;
-import com.kingdowin.xiugr.common.dao.cache.MemBean;
+import com.kingdowin.xiugr.common.dao.base.BaseModel;
 #if(${table.hasDate})
 import java.util.Date;
 #end
@@ -13,7 +12,7 @@ import java.util.Date;
  * @author ${author}
  * @since ${date}
  */
-public class ${entity} extends BaseBean implements MemBean  {
+public class ${model}  extends BaseModel   {
 
 
     #foreach($field in ${table.fields})
@@ -23,17 +22,7 @@ public class ${entity} extends BaseBean implements MemBean  {
     private ${field.propertyType} ${field.propertyName};
     #end
 
-    @Override
-    public String getKey() {
-        // TODO Auto-generated method stub
-        return getClassKey() + "_" + getId();
-    }
 
-    @Override
-    public String getClassKey() {
-        // TODO Auto-generated method stub
-        return ${entity}.class.getSimpleName().toUpperCase();
-    }
 
     #foreach($field in ${table.fields})
         #if(${field.propertyName.equals("Boolean")})
